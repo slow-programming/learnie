@@ -74,7 +74,7 @@ Template.recommendedList.events({
       return;
 
     Lessons.insert({
-      text: $input.val(),
+      name: $input.val(),
       createdAt: new Date()
     });
     $input.val('');

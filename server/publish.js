@@ -20,8 +20,9 @@ Meteor.publish('myLessons', function() {
   return Lessons.find({userId: this.userId}, {sort: {createdAt: -1}});
 });
 
-Meteor.publish('lessons', function() {
-  return Lessons.find();
+Meteor.publish('lessons', function(categoryId) {
+  var find = categoryId? {categoryId: categoryId} : '';
+  return Lessons.find(find);
 });
 
 Meteor.publish('categories', function() {
