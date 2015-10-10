@@ -1,0 +1,50 @@
+<template name="myLessons">
+    <div class="page lists-show">
+        <nav class="js-title-nav">
+            <div class="nav-group">
+                <a href="#" class="js-menu nav-item"><span class="icon-list-unordered" title="Show menu"></span></a>
+            </div>
+
+            <h1 class="js-edit-list title-page"><span class="title-wrapper">{{name}}</span> <span class="count-list">{{incompleteCount}}</span></h1>
+
+            <div class="nav-group right">
+                <div class="nav-item options-mobile">
+                    <select class="list-edit">
+                        <option disabled selected>Select an action</option>
+                        {{#if userId}}
+                            <option value="public">Make Public</option>
+                        {{else}}
+                            <option value="private">Make Private</option>
+                        {{/if}}
+                        <option value="delete">Delete</option>
+                    </select>
+                    <span class="icon-cog"></span>
+                </div>
+                <div class="options-web">
+                    <a class="js-add-lesson nav-item">
+                        <span class="icon-add" title="New Lesson"></span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="content-scrollable list-items">
+            {{#if lessonsReady}}
+                {{#with _id}}
+                    {{#each lessons this}}
+                        {{name}}
+                    {{else}}
+                        <div class="wrapper-message">
+                            <div class="title-message">No lessons here</div>
+                            <div class="subtitle-message">Add new lesson using the field above</div>
+                        </div>
+                    {{/each}}
+                {{/with}}
+            {{else}}
+                <div class="wrapper-message">
+                    <div class="title-message">Loading lessons...</div>
+                </div>
+            {{/if}}
+        </div>
+    </div>
+</template>

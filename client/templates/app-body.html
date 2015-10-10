@@ -24,10 +24,12 @@
       {{/if}}
 
       <div class="list-todos">
+          <!-- FIXME: remove "new list" link, need to remove route and logic also.
         <a class="js-new-list link-list-new"><span class="icon-plus"></span>New List</a>
+        -->
 
         {{#each lists}}
-          <a href="{{pathFor 'listsShow'}}" class="list-todo {{activeListClass}}" title="{{name}}">
+          <a href="{{pathFor id}}" class="list-todo {{activeListClass}}" title="{{name}}">
             {{#if userId}}
               <span class="icon-lock"></span>
             {{/if}}

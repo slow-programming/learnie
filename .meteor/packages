@@ -17,3 +17,5 @@ accounts-password
 jquery
 tracker
 check
+templates:forms
+froala:editor
