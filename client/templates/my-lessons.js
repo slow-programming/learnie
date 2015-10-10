@@ -40,10 +40,6 @@ Template.myLessons.helpers({
 
 Template.myLessons.events({
     'click .js-add-lesson': function(event, template) {
-        addLesson(this, template);
+        Router.go("myLessonsEdit", {_id: "NEW"});
     }
 });
-
-var addLesson = function(list, template) {
-    Router.go("myLessonsNew");
-}
