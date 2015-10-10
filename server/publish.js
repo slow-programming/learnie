@@ -23,3 +23,7 @@ Meteor.publish('myLessons', function() {
 Meteor.publish('lessons', function() {
   return Lessons.find();
 });
+
+Meteor.publish('categories', function() {
+  return Categories.find();
+});
