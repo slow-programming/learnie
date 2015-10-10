@@ -1,0 +1,50 @@
+<template name="myLessonsEdit">
+  <div class="page lists-show">
+    <nav class="js-title-nav">
+        <div class="nav-group">
+          <a href="#" class="js-menu nav-item"><span class="icon-list-unordered" title="Show menu"></span></a>
+        </div>
+
+        <h1 class="js-edit-list title-page"><span class="title-wrapper">New Lesson</span> <span class="count-list">{{incompleteCount}}</span></h1>
+
+        <div class="nav-group right">
+          <div class="options-web">
+              <a class="js-save-lesson nav-item">
+                  <span class="icon-check" title="Save Lesson"></span>
+              </a>
+          </div>
+        </div>
+
+    </nav>
+
+
+    <div class="content-scrollable list-items">
+        {{#if lessonsReady categoriesReady}}
+            <form>
+                <div class="form-item">
+                    Name: <input type="text" name="name" placeholder="Type name" value="{{name}}">
+                </div>
+                <div class="form-item">
+                    Description: <input type="text" name="desc" placeholder="Type description" value="{{desc}}">
+                </div>
+                <div class="form-item">
+                    Category:
+                    <select class="list-edit" name="categoryId" value="{{categoryId}}">
+                        <option disabled selected>Select an Category</option>
+                        {{#each categories this}}
+                            <option value="{{_id}}" selected="{{selectedCategory _id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="form-item">
+                    Tags: <input type="text" name="tags" placeholder="Type tags" value="{{tags}}">
+                </div>
+            </form>
+        {{else}}
+            <div class="wrapper-message">
+                <div class="title-message">Loading lessons...</div>
+            </div>
+        {{/if}}
+    </div>
+  </div>
+</template>
