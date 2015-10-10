@@ -23,3 +23,9 @@ Meteor.publish('myLessons', function() {
 Meteor.publish('lessons', function() {
   return Lessons.find();
 });
+
+Meteor.publish('cards', function(lessonId) {
+  check(lessonId, String);
+
+  return Cards.find({lessonId: lessonId});
+});
