@@ -16,4 +16,19 @@ Meteor.startup(function () {
       });
     });
   }
+  if(Categories.find().count() === 0) {
+    var categories = [
+      'Computer',
+      'Cook',
+      'Beatbox',
+      'Music',
+      'Graphic',
+      'Math',
+      'Language'
+    ];
+
+    _.each(categories, function(category) {
+      var list_id = Categories.insert({name: category});
+    });
+  }
 });

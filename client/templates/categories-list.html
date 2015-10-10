@@ -1,0 +1,29 @@
+<template name="categoriesList">
+  <div class="page lists-show">
+    <nav class="js-title-nav">
+        <div class="nav-group">
+          <a href="#" class="js-menu nav-item"><span class="icon-list-unordered" title="Show menu"></span></a>
+        </div>
+
+        <h1 class="js-edit-list title-page"><span class="title-wrapper">{{name}}</span></h1>
+    </nav>
+
+
+    <div class="content-scrollable list-items">
+      {{#if articleReady}}
+          {{#each articles}}
+            {{> categoriesItem}}
+          {{else}}
+            <div class="wrapper-message">
+              <div class="title-message">No tasks here</div>
+              <div class="subtitle-message">Add new tasks using the field above</div>
+            </div>
+          {{/each}}
+      {{else}}
+          <div class="wrapper-message">
+            <div class="title-message">Loading tasks...</div>
+          </div>
+      {{/if}}
+    </div>
+  </div>
+</template>
