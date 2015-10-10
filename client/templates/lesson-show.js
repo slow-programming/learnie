@@ -41,12 +41,12 @@ Template.lessonShow.helpers({
     return Session.get(EDITING_KEY);
   },
 
-  todosReady: function() {
+  cardsReady: function() {
     return Router.current().cardsHandle.ready();
   },
 
-  todos: function(listId) {
-    return Todos.find({listId: listId}, {sort: {createdAt : -1}});
+  cards: function(lessonId) {
+    return Cards.find({lessonId: lessonId}, {sort: {createdAt : -1}});
   }
 });
 
@@ -156,24 +156,24 @@ Template.lessonShow.events({
     deleteList(this, template);
   },
 
-  'click .js-todo-add': function(event, template) {
-    template.$('.js-todo-new input').focus();
+  'click .js-card-add': function(event, template) {
+    template.$('.js-card-new input').focus();
   },
 
-  'submit .js-todo-new': function(event) {
+  'submit .js-card-new': function(event) {
     event.preventDefault();
 
     var $input = $(event.target).find('[type=text]');
     if (! $input.val())
       return;
 
-    Todos.insert({
-      listId: this._id,
+    Cards.insert({
+      lessonId: this._id,
       text: $input.val(),
       checked: false,
       createdAt: new Date()
     });
-    Lists.update(this._id, {$inc: {incompleteCount: 1}});
+    //Lessons.update(this._id, {$inc: {incompleteCount: 1}});
     $input.val('');
   }
 });
