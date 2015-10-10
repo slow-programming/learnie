@@ -39,33 +39,11 @@ Template.myLessons.helpers({
 });
 
 Template.myLessons.events({
-    'click .js-lesson-add': function (event, template) {
-        template.$('.js-lesson-new input').focus();
-    },
-
-    'submit .js-lesson-new': function (event) {
-        event.preventDefault();
-
-        var $input = $(event.target).find('[type=text]');
-        if (!$input.val())
-            return;
-
-        var lesson = {
-            name: $input.val(),
-            userId: Meteor.userId(),
-            createdAt: new Date()
-        };
-        lesson._id = Lessons.insert(lesson);
-
-        $input.val('');
-    },
-    
     'click .js-add-lesson': function(event, template) {
         addLesson(this, template);
-    },
+    }
 });
 
 var addLesson = function(list, template) {
-    Session.set(EDITING_KEY, false);
     Router.go("myLessonsNew");
 }
