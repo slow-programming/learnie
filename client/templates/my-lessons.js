@@ -58,5 +58,14 @@ Template.myLessons.events({
         lesson._id = Lessons.insert(lesson);
 
         $input.val('');
-    }
+    },
+    
+    'click .js-add-lesson': function(event, template) {
+        addLesson(this, template);
+    },
 });
+
+var addLesson = function(list, template) {
+    Session.set(EDITING_KEY, false);
+    Router.go("myLessonsNew");
+}
