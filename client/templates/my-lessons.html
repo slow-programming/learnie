@@ -30,16 +30,14 @@
 
         <div class="content-scrollable list-items">
             {{#if lessonsReady}}
-                {{#with _id}}
-                    {{#each lessons this}}
-                        {{name}}
-                    {{else}}
-                        <div class="wrapper-message">
-                            <div class="title-message">No lessons here</div>
-                            <div class="subtitle-message">Add new lesson using the field above</div>
-                        </div>
-                    {{/each}}
-                {{/with}}
+                {{#each lessons this}}
+                    {{> lessonsItem}}
+                {{else}}
+                    <div class="wrapper-message">
+                        <div class="title-message">No lessons here</div>
+                        <div class="subtitle-message">Add new lesson using the field above</div>
+                    </div>
+                {{/each}}
             {{else}}
                 <div class="wrapper-message">
                     <div class="title-message">Loading lessons...</div>

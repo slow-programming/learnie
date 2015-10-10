@@ -1,12 +1,7 @@
 var EDITING_KEY = 'EDITING_TODO_ID';
 
 Template.lessonsItem.helpers({
-  checkedClass: function() {
-    return this.checked && 'checked';
-  },
-  editingClass: function() {
-    return Session.equals(EDITING_KEY, this._id) && 'editing';
-  }
+
 });
 
 Template.lessonsItem.events({
