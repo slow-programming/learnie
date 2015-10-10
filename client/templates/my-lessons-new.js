@@ -111,10 +111,6 @@ Template.myLessonsNew.events({
         var $desc = $('[name=desc]');
         var $tags = $('[name=tags]');
 
-        alert($name.val() + "," + $desc.val() + "," + $tags.val());
-
-        alert(!$name.val() || !$desc.val() || !$tags.val());
-
         if (!$name.val() || !$desc.val() || !$tags.val())
             return;
 
@@ -123,6 +119,8 @@ Template.myLessonsNew.events({
             description: $desc.val(),
             tags: $tags.val().split(","),
             userId: Meteor.userId(),
+            likes: 0,
+            username: Meteor.user().username,
             createdAt: new Date()
         };
         lesson._id = Lessons.insert(lesson);
