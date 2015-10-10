@@ -24,8 +24,6 @@ Meteor.publish('myLessons', function (lessonId) {
     }
 });
 
-Meteor.publish('lessons', function () {
-    return Lessons.find();
 Meteor.publish('lessons', function(categoryId) {
   var find = categoryId? {categoryId: categoryId} : {};
   return Lessons.find(find);

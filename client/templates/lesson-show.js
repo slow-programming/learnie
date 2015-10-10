@@ -33,6 +33,10 @@ Template.lessonShow.onRendered(function() {
 });
 
 Template.lessonShow.helpers({
+  isOwn: function() {
+    return Meteor.userId() == this.userId;
+  },
+
   editing: function() {
     return Session.get(EDITING_KEY);
   },
