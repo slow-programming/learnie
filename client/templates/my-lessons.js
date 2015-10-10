@@ -30,7 +30,7 @@ Template.myLessons.onRendered(function () {
 });
 
 Template.myLessons.created = function() {
-    this.lessons = new ReactiveVar("lessons");
+    this.lessons = new ReactiveVar("myLessons");
     this.lessons.set(Lessons.find({userId: Meteor.userId()}, {sort: {createdAt: -1}}));
 };
 
@@ -65,7 +65,7 @@ var search = function () {
     var keyword = $('.js-search-bar [type=text]').val();
     if (keyword && keyword.trim() != '') {
         var regex = new RegExp(keyword, "i");
-        Template.instance().lessons.set(Lessons.find({userId: Meteor.userId(), name: {$regex:regex}, tags: {$regex:regex}}, {sort: {createdAt: -1}}));
+        Template.instance().lessons.set(Lessons.find({userId: Meteor.userId(), $or: [, {name: {$regex:regex}}, {tags: {$regex:regex}}]}, {sort: {createdAt: -1}}));
     } else {
         Template.instance().lessons.set(Lessons.find({userId: Meteor.userId()}, {sort: {createdAt: -1}}));
     }

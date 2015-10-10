@@ -33,9 +33,9 @@ Template.recommendedList.onRendered(function () {
     };
 });
 
-Template.myLessons.created = function() {
-    this.lessons = new ReactiveVar("lessons");
-    this.lessons.set(Lessons.find({}, {sort: {createdAt: -1}}));
+Template.recommendedList.created = function() {
+    this.articles = new ReactiveVar(null);
+    this.articles.set(Lessons.find({}, {sort: {createdAt: -1}}));
 };
 
 Template.recommendedList.helpers({
@@ -44,7 +44,7 @@ Template.recommendedList.helpers({
     },
 
     articles: function () {
-        return Template.instance().lessons.get();
+        return Template.instance().articles.get();
     }
 });
 
@@ -70,8 +70,8 @@ var search = function () {
     var keyword = $('.js-search-bar [type=text]').val();
     if (keyword && keyword.trim() != '') {
         var regex = new RegExp(keyword, "i");
-        Template.instance().lessons.set(Lessons.find({name: {$regex:regex}, tags: {$regex:regex}}, {sort: {createdAt: -1}}));
+        Template.instance().lessons.set(Lessons.find({$or: [, {name: {$regex:regex}}, {tags: {$regex:regex}}]}, {sort: {createdAt: -1}}));
     } else {
-        Template.instance().lessons.set(Lessons.find({}, {sort: {createdAt: -1}}));
+        Template.instance().articles.set(Lessons.find({}, {sort: {createdAt: -1}}));
     }
 };

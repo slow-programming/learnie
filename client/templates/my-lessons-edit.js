@@ -41,7 +41,7 @@ Template.myLessonsEdit.events({
         if (!$name || !$desc || !$tags || !$categoryId)
             return;
 
-        if (this._id == 'NEW') {
+        if (!this._id || this._id == 'NEW') {
             var lesson = {
                 name: $name,
                 desc: $desc,
