@@ -15,3 +15,7 @@ Meteor.publish('todos', function(listId) {
 
   return Todos.find({listId: listId});
 });
+
+Meteor.publish('lessons', function() {
+  return Lessons.find({userId: this.userId}, {sort: {createdAt: -1}});
+});
