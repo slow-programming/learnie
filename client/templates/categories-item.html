@@ -1,5 +1,7 @@
 <template name="categoriesItem">
+  <a href="{{pathFor 'recommendedList' _id=this._id}}">
     <div class="list-item">
         {{name}}
     </div>
+  </a>
 </template>
