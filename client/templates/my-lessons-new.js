@@ -1,4 +1,4 @@
-var EDITING_KEY = 'editingList';
+var EDITING_KEY = 'editingMyLessonNew';
 Session.setDefault(EDITING_KEY, false);
 
 // Track if this is the first time the list template is rendered
@@ -32,24 +32,9 @@ Template.listsShow.onRendered(function() {
   };
 });
 
-Template.listsShow.helpers({
-  editing: function() {
-    return Session.get(EDITING_KEY);
-  },
+Template.myLessonsNew.helpers({
 
-  todosReady: function() {
-    return Router.current().todosHandle.ready();
-  },
-
-  todos: function(listId) {
-    return Todos.find({listId: listId}, {sort: {createdAt : -1}});
-  }
 });
-
-var addLesson = function(list, template) {
-  Session.set(EDITING_KEY, false);
-  Router.go("myLessonsNew");
-}
 
 var editList = function(list, template) {
   Session.set(EDITING_KEY, true);
@@ -102,7 +87,7 @@ var toggleListPrivacy = function(list) {
   }
 };
 
-Template.myLessons.events({
+Template.myLessonsNew.events({
   'click .js-cancel': function() {
     Session.set(EDITING_KEY, false);
   },
@@ -119,6 +104,10 @@ Template.myLessons.events({
     // if we are still editing (we haven't just clicked the cancel button)
     if (Session.get(EDITING_KEY))
       saveList(this, template);
+  },
+
+  'click. js-save-lesson': function() {
+    alert("TODO: save lesson")
   },
 
   'submit .js-edit-form': function(event, template) {
@@ -155,10 +144,6 @@ Template.myLessons.events({
 
   'click .js-delete-list': function(event, template) {
     deleteList(this, template);
-  },
-
-  'click .js-add-lesson': function(event, template) {
-    addLesson(this, template);
   },
 
   'click .js-todo-add': function(event, template) {
