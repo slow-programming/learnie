@@ -4,6 +4,15 @@
     <section id="menu">
       {{#if currentUser}}
         <div class="btns-group-vertical">
+
+            <div class="avatar-frame">
+
+                <a href="{{pathFor 'uploadAvatar'}}">
+                    <img src="{{currentUser.profile.avatar}}" />
+                </a>
+            </div>
+            <br/>
+
           <a href="#" class="js-user-menu btn-secondary">
             {{#if userMenuOpen}}
               <span class="icon-arrow-up"></span>
