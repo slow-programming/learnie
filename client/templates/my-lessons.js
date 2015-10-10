@@ -29,17 +29,44 @@ Template.myLessons.onRendered(function () {
     };
 });
 
+Template.myLessons.created = function() {
+    this.lessons = new ReactiveVar("lessons");
+    this.lessons.set(Lessons.find({userId: Meteor.userId()}, {sort: {createdAt: -1}}));
+};
+
 Template.myLessons.helpers({
     lessonsReady: function () {
         return Router.current().lessonsHandle.ready();
     },
     lessons: function () {
-        return Lessons.find({userId: Meteor.userId()}, {sort: {createdAt: -1}});
+        return Template.instance().lessons.get();
     }
 });
 
 Template.myLessons.events({
     'click .js-add-lesson': function(event, template) {
         Router.go("myLessonsEdit", {_id: "NEW"});
+    },
+
+    'keypress .js-search-bar [type=text]': function(event) {
+        //event.preventDefault();
+
+        search();
+    },
+
+    'submit .js-search-bar': function(event) {
+        event.preventDefault();
+
+        search();
     }
 });
+
+var search = function () {
+    var keyword = $('.js-search-bar [type=text]').val();
+    if (keyword && keyword.trim() != '') {
+        var regex = new RegExp(keyword, "i");
+        Template.instance().lessons.set(Lessons.find({userId: Meteor.userId(), name: {$regex:regex}, tags: {$regex:regex}}, {sort: {createdAt: -1}}));
+    } else {
+        Template.instance().lessons.set(Lessons.find({userId: Meteor.userId()}, {sort: {createdAt: -1}}));
+    }
+};
