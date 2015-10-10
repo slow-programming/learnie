@@ -24,11 +24,17 @@ Meteor.publish('myLessons', function (lessonId) {
     }
 });
 
-Meteor.publish('lessons', function (categoryId) {
-    var find = categoryId ? {categoryId: categoryId} : '';
-    return Lessons.find(find);
+Meteor.publish('lessons', function(categoryId) {
+  var find = categoryId? {categoryId: categoryId} : {};
+  return Lessons.find(find);
 });
 
 Meteor.publish('categories', function () {
     return Categories.find();
+});
+
+Meteor.publish('cards', function(lessonId) {
+  check(lessonId, String);
+
+  return Cards.find({lessonId: lessonId});
 });
