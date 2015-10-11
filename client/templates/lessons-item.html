@@ -8,6 +8,11 @@
                 <span>{{likes}}</span> by <span>{{username}}</span>
             </div>
             <div></div>
+            {{#if image}}
+            <div class="img_box"><img src="{{image}}" /></div>
+            {{else}}
+                <!-- OK -->
+            {{/if}}
         </div>
     </a>
 </template>
