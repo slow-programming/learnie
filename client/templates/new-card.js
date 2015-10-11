@@ -1,8 +1,5 @@
-Session.setDefault('slider', [0, 0]);
-
 Session.setDefault('itemId', 0);
-
-Session.setDefault('card', {});
+Session.setDefault('layers', []);
 
 var selected = null, // Object of the element to be moved
     x_pos = 0, y_pos = 0, // Stores x & y coordinates of the mouse pointer
@@ -33,18 +30,21 @@ var _move_elem = function(e) {
 // Destroy the object when we are done
 var _destroy = function() {
     if(selected) {
-        var id = 0;
+        var id = selected.id;
+        var matchResult;
 
-        if(selected.id.indexOf('text')) {
-            Number(selected.id.match(/[^text_]/g));
+        if(id.indexOf('text') >= 0) {
+            id = id.match(/[^text_]/g);
         } else {
-            Number(selected.id.match(/[^image_]/g));
+            id = id.match(/[^image_]/g);
         }
 
-        var card = Session.get('card');
-        card[id].left = selected.style.left;
-        card[id].top = selected.style.top;
-        Session.set('card', card);
+        id = id.join('');
+
+        var layers = Session.get('layers');
+        layers[id].itemLeft = selected.style.left;
+        layers[id].itemTop = selected.style.top;
+        Session.set('layers', layers);
     }
     selected = null;
 }
@@ -67,15 +67,15 @@ var addTextItem = function(id) {
         return true;
     });
 
-    var card = Session.get('card');
-    card[id].type = 'text';
-    card[id].text = editor.getData();
-    Session.set('card', card);
+    var layers = Session.get('layers');
+    layers[id].type = 'text';
+    layers[id].data = editor.getData();
+    Session.set('layers', layers);
 
     editor.on('change', function() {
-        var card = Session.get('card');
-        card[id].text = editor.getData();
-        Session.set('card', card);
+        var layers = Session.get('layer');
+        layers[id].data = editor.getData();
+        Session.set('layer', layer);
     });
 }
 
@@ -85,10 +85,10 @@ var addImageItem = function(id) {
         return true;
     });
 
-    var card = Session.get('card');
-    card[id].type = 'image';
-    card[id].url = '';
-    Session.set('card', card);
+    var layers = Session.get('layers');
+    layers[id].type = 'image';
+    layers[id].url = '';
+    Session.set('layers', layers);
 }
 
 var addSlider = function(id) {
@@ -96,31 +96,30 @@ var addSlider = function(id) {
         start: [0, 0],
         behaviour: 'drag-tap',
         connect: true,
+        step: 1,
         range: {
             'min': 0,
             'max': 10
         }
     }).on('slide', function(ev, val) {
-        // set real values on 'slide' event
-        Session.set('slider', val);
     }).on('change', function(ev, val) {
         // round off values on 'change' event
-        var card = Session.get('card');
-        card[id].start = val[0];
-        card[id].end = val[1];
-        Session.set('card', card);
+        var layers = Session.get('layers');
+        layers[id].frameBegin = Number(val[0]);
+        layers[id].frameEnd = Number(val[1]);
+        Session.set('layers', layers);
     });
 }
 
 var addNewLayer = function(id) {
-    var card = Session.get('card');
-    card[id] = {
-        left: 0,
-        top: 0,
-        start: 0,
-        end: 0
-    };
-    Session.set('card', card);
+    var layers = Session.get('layers');
+    layers.push({
+        itemLeft: '0px',
+        itemTop: '0px',
+        frameBegin: 0,
+        frameEnd: 0
+    });
+    Session.set('layers', layers);
 }
 
 var itemView = function(e) {
@@ -128,15 +127,24 @@ var itemView = function(e) {
 }
 
 Template.newCard.helpers({
-    slider: function() {
-        return Session.get('slider');
-    }
 });
 
 Template.newCard.events({
     'click .save-card': function() {
-        var card = Session.get('card');
-        console.log(card);
+        var lesson = Lessons.findOne();
+        var layers = Session.get('layers');
+        var card = {
+            order: lesson.cards | 0,
+            lessonId: lesson._id,
+            layers: layers
+        }
+        Cards.insert(card);
+        Lessons.update(lesson._id, {$inc: {cards: 1}});
+
+        Session.set('itemId', 0);
+        Session.set('layers', []);
+
+        Router.go('lessonShow', {_id:lesson._id});
     },
     'click .new-text': function() {
         var id = Session.get('itemId');
