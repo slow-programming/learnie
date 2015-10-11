@@ -40,7 +40,7 @@ Template.uploadAvatar.helpers({
       finished: function(index, fileInfo, context) {
         console.log(fileInfo);
         console.log(Meteor.user());
-        Meteor.users.update({_id:Meteor.userId()}, {$set:{"profile.avatar": fileInfo.url}});
+        Meteor.users.update({_id:Meteor.userId()}, {$set:{"profile.avatar": '/upload/' + fileInfo.path}});
       }
     }
   }

@@ -67,7 +67,7 @@ Template.appBody.helpers({
         return Meteor.isCordova && 'cordova';
     },
     userName: function () {
-        return Meteor.user().username;
+        return Meteor.user().profile.name;
     },
     userMenuOpen: function () {
         return Session.get(USER_MENU_KEY);

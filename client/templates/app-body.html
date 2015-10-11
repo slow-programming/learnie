@@ -13,17 +13,8 @@
             </div>
             <br/>
 
-          <a href="#" class="js-user-menu btn-secondary">
-            {{#if userMenuOpen}}
-              <span class="icon-arrow-up"></span>
-              {{else}}
-              <span class="icon-arrow-down"></span>
-            {{/if}}
-            {{userName}}
-          </a>
-          {{#if userMenuOpen}}
+            <a href="{{pathFor 'join'}}" class="btn-secondary">{{userName}}</a>
             <a class="js-logout btn-secondary">Logout</a>
-          {{/if}}
         </div>
       {{else}}
         <div class="btns-group">
