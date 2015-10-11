@@ -33,11 +33,11 @@
                         {{#if isOwn}}
                             <a class="icon-add" href="{{pathFor 'newCard' _id=this._id}}"></a>
                             <a class="icon-edit" href="{{pathFor 'myLessonsEdit' _id=this._id}}"></a>
+                            <a class="js-delete-list nav-item">
+                                <span class="icon-trash" title="Delete Lesson"></span>
+                            </a>
                         {{/if}}
 
-                        <a class="js-delete-list nav-item">
-                            <span class="icon-trash" title="Delete Lesson"></span>
-                        </a>
                     </div>
 
                 </div>

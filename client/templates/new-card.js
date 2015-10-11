@@ -105,8 +105,8 @@ var addSlider = function(id) {
     }).on('change', function(ev, val) {
         // round off values on 'change' event
         var layers = Session.get('layers');
-        layers[id].frameBegin = Number(val[0]);
-        layers[id].frameEnd = Number(val[1]);
+        layers[id].framesBegin = Number(val[0]);
+        layers[id].framesEnd = Number(val[1]);
         Session.set('layers', layers);
     });
 }
@@ -116,8 +116,8 @@ var addNewLayer = function(id) {
     layers.push({
         itemLeft: '0px',
         itemTop: '0px',
-        frameBegin: 0,
-        frameEnd: 0
+        framesBegin: 0,
+        framesEnd: 0
     });
     Session.set('layers', layers);
 }

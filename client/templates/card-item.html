@@ -1,16 +1,17 @@
 <template name="cardItem">
-  <div>
+  <div class="frame-container">
       {{#with this}}
           {{#each layers this}}
+              <div class="layer-{{@index}}">
               {{> cardLayer this}}
+              </div>
           {{/each}}
       {{/with}}
   </div>
 </template>
 
 <template name="cardLayer">
-    <div>
-        {{type}}
+    <div class="img_box2">
         {{#if isImageType}}
             <img src="{{data}}" />
         {{else}}

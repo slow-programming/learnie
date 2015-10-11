@@ -36,7 +36,6 @@ Template.uploadAvatar.helpers({
 
   onUploadFinished: function() {
     return {
-      //formData: function() { return { id: "232323", other: Session.get("ReactiveParam") } },
       finished: function(index, fileInfo, context) {
         console.log(fileInfo);
         console.log(Meteor.user());
