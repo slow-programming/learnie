@@ -21,3 +21,5 @@ udondan:slick
 reactive-var
 tomi:upload-server
 tomi:upload-jquery
+matb33:bootstrap-grid
+matb33:bootstrap-full
