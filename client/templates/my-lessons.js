@@ -48,7 +48,7 @@ Template.myLessons.events({
         Router.go("myLessonsEdit", {_id: "NEW"});
     },
 
-    'keypress .js-search-bar [type=text]': function(event) {
+    'focusout .js-search-bar [type=text], keypress .js-search-bar [type=text], keyup .js-search-bar [type=text], keydown .js-search-bar [type=text]': function(event) {
         //event.preventDefault();
 
         search();
