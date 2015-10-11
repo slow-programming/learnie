@@ -1,5 +1,20 @@
 <template name="cardItem">
-  <div class="list-item">
-      {{text}}
+  <div>
+      {{#with this}}
+          {{#each layers this}}
+              {{> cardLayer this}}
+          {{/each}}
+      {{/with}}
   </div>
+</template>
+
+<template name="cardLayer">
+    <div>
+        {{type}}
+        {{#if isImageType}}
+            <img src="{{data}}" />
+        {{else}}
+            {{data}}
+        {{/if}}
+    </div>
 </template>

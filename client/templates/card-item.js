@@ -1,4 +1,8 @@
+
 Template.cardItem.helpers({
+    layers: function(card) {
+        return card.layers;
+    }
 });
 
 Template.cardItem.onRendered(function() {
@@ -11,4 +15,11 @@ Template.cardItem.onRendered(function() {
     cssEase: 'linear',
     adaptiveHeight: true
   });
+});
+
+Template.cardLayer.helpers({
+    isImageType: function() {
+        console.log("isImageTye=", this.data, this.data.type);
+        return this.data.indexOf('/') >= 0 ;
+    }
 });
