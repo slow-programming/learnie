@@ -34,8 +34,8 @@ Template.recommendedList.onRendered(function () {
 });
 
 Template.recommendedList.created = function() {
-    this.articles = new ReactiveVar(null);
-    this.articles.set(Lessons.find({}, {sort: {createdAt: -1}}));
+    this.recommendedLessons = new ReactiveVar(null);
+    this.recommendedLessons.set(Lessons.find({}, {sort: {createdAt: -1}}));
 };
 
 Template.recommendedList.helpers({
@@ -44,7 +44,7 @@ Template.recommendedList.helpers({
     },
 
     articles: function () {
-        return Template.instance().articles.get();
+        return Template.instance().recommendedLessons.get();
     }
 });
 
@@ -53,7 +53,7 @@ Template.recommendedList.events({
         template.$('.js-search-bar input').focus();
     },
 
-    'keypup .js-search-bar [type=text]': function(event) {
+    'focusout .js-search-bar [type=text], keypress .js-search-bar [type=text], keyup .js-search-bar [type=text], keydown .js-search-bar [type=text]': function(event) {
         //event.preventDefault();
 
         search();
@@ -70,8 +70,8 @@ var search = function () {
     var keyword = $('.js-search-bar [type=text]').val();
     if (keyword && keyword.trim() != '') {
         var regex = new RegExp(keyword, "i");
-        Template.instance().lessons.set(Lessons.find({$or: [, {name: {$regex:regex}}, {tags: {$regex:regex}}]}, {sort: {createdAt: -1}}));
+        Template.instance().recommendedLessons.set(Lessons.find({$or: [, {name: {$regex:regex}}, {tags: {$regex:regex}}]}, {sort: {createdAt: -1}}));
     } else {
-        Template.instance().articles.set(Lessons.find({}, {sort: {createdAt: -1}}));
+        Template.instance().recommendedLessons.set(Lessons.find({}, {sort: {createdAt: -1}}));
     }
 };

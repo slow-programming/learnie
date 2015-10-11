@@ -52,7 +52,7 @@ Template.categoriesList.events({
         template.$('.js-search-bar input').focus();
     },
 
-    'keypress .js-search-bar [type=text]': function(event) {
+    'focusout .js-search-bar [type=text], keypress .js-search-bar [type=text], keyup .js-search-bar [type=text], keydown .js-search-bar [type=text]': function(event) {
         //event.preventDefault();
 
         search();
