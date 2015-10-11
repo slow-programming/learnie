@@ -1,34 +1,34 @@
 <template name="recommendedList">
-  <div class="page lists-show">
-    <nav class="js-title-nav">
-        <div class="nav-group">
-          <a href="#" class="js-menu nav-item"><span class="icon-list-unordered" title="Show menu"></span></a>
-        </div>
-
-        <h1 class="js-edit-list title-page"><span class="title-wrapper">{{name}}</span></h1>
-
-      <form class="js-todo-new todo-new input-symbol">
-        <input type="text" placeholder="Type to add new tasks">
-        <span class="icon-add js-todo-add"></span>
-      </form>
-    </nav>
-
-
-    <div class="content-scrollable list-items">
-      {{#if articleReady}}
-          {{#each articles}}
-            {{> lessonsItem}}
-          {{else}}
-            <div class="wrapper-message">
-              <div class="title-message">No tasks here</div>
-              <div class="subtitle-message">Add new tasks using the field above</div>
+    <div class="page lists-show">
+        <nav class="js-title-nav">
+            <div class="nav-group">
+                <a href="#" class="js-menu nav-item"><span class="icon-list-unordered" title="Show menu"></span></a>
             </div>
-          {{/each}}
-      {{else}}
-          <div class="wrapper-message">
-            <div class="title-message">Loading tasks...</div>
-          </div>
-      {{/if}}
+
+            <h1 class="js-edit-list title-page"><span class="title-wrapper">{{name}}</span></h1>
+
+            <form class="js-search-bar search-bar input-symbol">
+                <input type="text" placeholder="Search">
+                <span class="icon-sync js-search"></span>
+            </form>
+        </nav>
+
+
+        <div class="content-scrollable list-items">
+            {{#if articleReady}}
+                {{#each articles}}
+                    {{> lessonsItem}}
+                {{else}}
+                    <div class="wrapper-message">
+                        <div class="title-message">No tasks here</div>
+                        <div class="subtitle-message">Add new tasks using the field above</div>
+                    </div>
+                {{/each}}
+            {{else}}
+                <div class="wrapper-message">
+                    <div class="title-message">Loading tasks...</div>
+                </div>
+            {{/if}}
+        </div>
     </div>
-  </div>
 </template>

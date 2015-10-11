@@ -4,17 +4,17 @@
     <section id="menu">
       {{#if currentUser}}
         <div class="btns-group-vertical">
-          <a href="#" class="js-user-menu btn-secondary">
-            {{#if userMenuOpen}}
-              <span class="icon-arrow-up"></span>
-              {{else}}
-              <span class="icon-arrow-down"></span>
-            {{/if}}
-            {{userName}}
-          </a>
-          {{#if userMenuOpen}}
+
+            <div class="avatar-frame">
+
+                <a href="{{pathFor 'uploadAvatar'}}">
+                    <img src="{{currentUser.profile.avatar}}" />
+                </a>
+            </div>
+            <br/>
+
+            <a href="{{pathFor 'join'}}" class="btn-secondary">{{userName}}</a>
             <a class="js-logout btn-secondary">Logout</a>
-          {{/if}}
         </div>
       {{else}}
         <div class="btns-group">

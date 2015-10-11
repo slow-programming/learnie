@@ -32,3 +32,9 @@ Meteor.publish('lessons', function(categoryId) {
 Meteor.publish('categories', function () {
     return Categories.find();
 });
+
+Meteor.publish('cards', function(lessonId) {
+  check(lessonId, String);
+
+  return Cards.find({lessonId: lessonId});
+});

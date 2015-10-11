@@ -31,4 +31,29 @@ Meteor.startup(function () {
       var list_id = Categories.insert({name: category});
     });
   }
+  if (Lessons.find().count() == 0) {
+    Lessons.insert({
+      name: 'Welcome',
+      _id: 'lesson_welcome',
+      image: '/upload/welcome_meteor.jpg'
+    });
+    Cards.insert({
+      order: 0,
+      lessonId: 'lesson_welcome',
+      layers: [
+        {
+          type: 'text',
+          framesBegin: 0,
+          freamesEnd: 1,
+          data: 'Welcome'
+        },
+        {
+          type: 'image',
+          framesBegin: 0,
+          framesEnd: 9,
+          data: '/upload/welcome_meteor.jpg'
+        }
+      ]
+    });
+  }
 });

@@ -8,8 +8,13 @@
 
     <div class="content-scrollable">
       <div class="wrapper-auth">
-        <h1 class="title-auth">Join.</h1>
-        <p class="subtitle-auth" >Joining allows you to make private lists</p>
+        {{#if this._id}}
+            <h1 class="title-auth">Edit</h1>
+            <p class="subtitle-auth" >Change your profile.</p>
+        {{else}}
+            <h1 class="title-auth">Join.</h1>
+            <p class="subtitle-auth" >Joining allows you to make private lists</p>
+        {{/if}}
 
         <form>
           {{#if errorMessages}}
@@ -21,26 +26,29 @@
           {{/if}}
 
           <div class="input-symbol  {{errorClass 'email'}}">
-            <input type="email" name="email" placeholder="Your Email" />
+            <input type="email" name="email" value="{{profile.email}}" placeholder="Your Email" />
             <span class="icon-email" title="Your Email"></span>
           </div>
 
             <div class="input-symbol {{errorClass 'confirm'}}">
-                <input type="text" name="name" placeholder="Yout Name" />
+                <input type="text" name="name" value="{{profile.name}}" placeholder="Yout Name" />
                 <span class="icon-edit" title="Your Name"></span>
             </div>
 
-          <div class="input-symbol  {{errorClass 'password'}}">
-            <input type="password" name="password" placeholder="Password" />
-            <span class="icon-lock" title="Password"></span>
-          </div>
+            {{#unless this._id}}
 
-          <div class="input-symbol {{errorClass 'confirm'}}">
-            <input type="password" name="confirm" placeholder="Confirm Password" />
-            <span class="icon-lock" title="Confirm Password"></span>
-          </div>
+                <div class="input-symbol  {{errorClass 'password'}}">
+                    <input type="password" name="password" placeholder="Password" />
+                    <span class="icon-lock" title="Password"></span>
+                </div>
 
-          <button type="submit" class="btn-primary">Join Now</button>
+                <div class="input-symbol {{errorClass 'confirm'}}">
+                    <input type="password" name="confirm" placeholder="Confirm Password" />
+                    <span class="icon-lock" title="Confirm Password"></span>
+                </div>
+            {{/unless}}
+
+          <button type="submit" class="btn-primary">{{#if this._id}}Edit{{else}}Join Now{{/if}}</button>
         </form>
       </div>
 

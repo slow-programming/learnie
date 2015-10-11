@@ -1,14 +1,18 @@
 <template name="lessonsItem">
-    <div class="list-item">
-        <div class="item-name">
-            {{name}}
-            {{#if isOwn}}
-                <a class="icon-edit js-modify-lesson"></a>
+    <a href="{{pathFor 'lessonShow' _id=this._id}}">
+        <div class="list-item col-md-1">
+            <div class="item-name">
+                {{name}}
+            </div>
+            <div class="item-likes">
+                <span>{{likes}}</span> by <span>{{username}}</span>
+            </div>
+            <div></div>
+            {{#if image}}
+            <div class="img_box"><img src="{{image}}" /></div>
+            {{else}}
+                <!-- OK -->
             {{/if}}
         </div>
-        <div class="item-likes">
-            <span>{{likes}}</span> by <span>{{username}}</span>
-        </div>
-        <div></div>
-    </div>
+    </a>
 </template>
