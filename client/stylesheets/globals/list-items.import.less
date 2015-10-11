@@ -1,13 +1,33 @@
 .list-item {
-  border: 1px solid #000;
-  width: 80px;
-  height: 80px;
-  padding: 10px;
-  margin: 10px;
+//  border: 1px solid @color-raw;
+ background-color: @color-raw;
+  color:@color-medium-well;
+  font-size:1.1em;
+  width: 200px;
+  min-height: 250px;
+  height: auto;
+  padding: 15px;
+  // padding-top:15px;
+  margin: 2px;
+  float: left;
+  line-height: 1.2;
+  text-align: left;
+  font-weight: bold;
+  // border-radius:5px;
+  overflow: hidden;
+
+
+
+}
+@media screen and (max-width: 40em) {
+  .list-item{width:43vw;min-height:200px; height:auto; padding:1vw; margin:0.2vw;}
+
 }
 
 .list-items {
   .font-s2;
+  padding-top:20px;
+  padding-left:15px;
 
   // Layout of list-item children
   .display(flex);

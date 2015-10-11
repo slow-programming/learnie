@@ -12,11 +12,12 @@ var CONNECTION_ISSUE_TIMEOUT = 5000;
 Meteor.startup(function () {
     // set up a swipe left / right handler
     $(document.body).touchwipe({
+        wipeRight: function () {
+
+            Session.set(MENU_KEY, true);
+        },
         wipeLeft: function () {
             Session.set(MENU_KEY, false);
-        },
-        wipeRight: function () {
-            Session.set(MENU_KEY, true);
         },
         preventDefaultEvents: false
     });

@@ -22,7 +22,7 @@ nav {
     }
   }
   .nav-group {
-    .position(absolute, 0, auto, auto, 0);
+    .position(absolute, 0, 0, auto, auto);
     z-index: 1;
 
     &.right {
@@ -34,17 +34,18 @@ nav {
 
 // Custom nav for lists-show
 .page.lists-show nav {
-  .background-image( linear-gradient(top, #d0edf5, #e1e5f0 100%) );
+  .background-image(linear-gradient(top, @color-main-first, @color-main-first 100%));
   height: 5em;
 
   text-align: center;
   @media screen and (min-width: 40em) { text-align: left; }
 
   .title-page {
-    .position(absolute, 0, 3rem, auto, 3rem);
+    .position(absolute, 0, auto, auto, 3rem);
+    float: left;
     @media screen and (min-width: 40em) {
-      left: 1rem;
-      right: 6rem;
+      left: 0.5rem;
+      // right: 6rem;
     }
 
     cursor: pointer;
@@ -53,11 +54,16 @@ nav {
 
     .title-wrapper {
       .ellipsized;
-      color: @color-ancillary;
-      display: inline-block;
-      padding-right: 1.5rem;
-      vertical-align: top;
-      max-width: 100%;
+      text-indent:-9999em;
+      overflow: hidden;
+      width: 60px;height: 50px;
+      display: block;
+      float:left;
+      margin:1em 0;
+      background-image: url("img/h1_mini_logo.png");
+      background-size:contain;
+      background-repeat:no-repeat;
+      background-position: center center;
     }
 
     .count-list {
@@ -84,13 +90,22 @@ nav {
     }
   }
   form.search-bar {
-    .position(absolute, 3em, 0, auto, 0);
-
+    .position(absolute, 2em, 0, auto, 8em);
+    width: 70%;
+    @media screen and (max-width:40em){
+      width:40%;
+    }
     input[type="text"] {
       background: transparent;
+      width: 100%;
       padding-bottom: .25em;
       padding-left: 44px !important;
       padding-top: .25em;
+      background-color: @color-empty;
+      border-radius:3em;
+      text-indent:1em;
+
+
     }
   }
   form.lesson-new {
@@ -124,12 +139,18 @@ nav {
 
   .options-web {
     display: none;
-
+    .js-menu{color:#ffffff;
+    .font-m1;}
     .nav-item {
-      .font-s3;
-      width: 2rem;
+      color:#ffffff;
+      .font-m1;
+      width: 3rem;
+      margin:1em;
+      >span.icon-list-unordered{
+    color:@color-empty;
+      }
 
-      &:last-child { margin-right: .5rem; }
+      &:last-child { margin-right: .5rem;  color:@color-empty; }
     }
   }
 
